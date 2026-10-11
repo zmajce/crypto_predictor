@@ -1,14 +1,11 @@
-
-from datetime import datetime
-from typing import List
-
 from .trade import Trade
+
 
 class KrakenMockAPI:
     def __init__(self, pair: str):
-        self.pair = pair 
+        self.pair = pair
 
-    def get_trades(self) -> List[Trade]:
+    def get_trades(self) -> list[Trade]:
         """
         Returns a list of mock trades.
         """

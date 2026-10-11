@@ -1,2 +1,16 @@
-run:
+.PHONY: run-dev build start-redpanda run
+
+run-dev:
 	uv run python run.py
+
+build:
+	docker build -f Dockerfile -t trades .
+
+start-redpanda:
+	$(MAKE) -C ../../docker-compose start-redpanda
+
+run: build start-redpanda
+	docker run -it \
+		--network redpanda_network \
+		-e KAFKA_BROKER_ADDRESS=redpanda:9092 \
+		trades
